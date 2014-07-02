@@ -34,6 +34,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // insert the item at the front
     public void addFirst(Item item) {
+        if (item==null) {throw new NullPointerException();}
         Node<Item> newFirst = new Node();
         newFirst.item = item;
         newFirst.previous = null;
@@ -52,6 +53,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // insert the item at the end
     public void addLast(Item item) {
+        if (item==null) {throw new NullPointerException();}
         Node<Item> newLast = new Node();
         newLast.item = item;
         newLast.previous = last;
@@ -70,7 +72,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // delete and return the item at the front
     public Item removeFirst() {
-        if (isEmpty()) throw new NoSuchElementException("Queue underflow");
+        if (isEmpty()) throw new NoSuchElementException("Deque is empty");
         Item item = first.item;
         first = first.next;
         N--;
@@ -85,7 +87,7 @@ public class Deque<Item> implements Iterable<Item> {
 
     // delete and return the item at the end
     public Item removeLast() {
-        if (isEmpty()) throw new NoSuchElementException("Queue underflow");
+        if (isEmpty()) throw new NoSuchElementException("Deque is empty");
         Item item = last.item;
         last = last.previous;
         N--;
@@ -168,5 +170,12 @@ public class Deque<Item> implements Iterable<Item> {
         StdOut.println("removelast to string: "+ deque.toString());
         deque.removeLast();
         StdOut.println("removelast to string: "+ deque.toString());
+        //deque.addLast(null);
+        //deque.addFirst(null);
+        ///deque.removeLast();
+        //deque.removeFirst();
+
+
+
     }
 }
