@@ -145,6 +145,22 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         queue.enqueue(10);
         StdOut.println(queue.toString());
         StdOut.println(queue.toString());
+        StdOut.println(queue.dequeue());
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+        StdOut.println(queue.dequeue());
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+        StdOut.println(queue.dequeue());
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+        StdOut.println(queue.dequeue());
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+        StdOut.println(queue.dequeue());
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+
 
     }
 }
