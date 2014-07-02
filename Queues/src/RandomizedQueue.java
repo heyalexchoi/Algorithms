@@ -13,7 +13,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public RandomizedQueue() {
         array = (Item[])new Object[2];
         N = 0;
-
     }
 
     // is the queue empty?
@@ -31,9 +30,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         assert capacity >= N;
         Item[] temp = (Item[]) new Object[capacity];
         for (int i = 0; i < N; i++) {
-            temp[i] = a[i];
+            temp[i] = array[i];
         }
-        a = temp;
+        array = temp;
     }
 
     // add the item
@@ -72,6 +71,37 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // return an independent iterator over items in random order
     public Iterator<Item> iterator() {
+        return new RandomizedArrayIterator();
+    }
+
+    private class RandomizedArrayIterator implements Iterator<Item> {
+
+        private int copiedN;
+        private Item[] copiedArray;
+
+        public RandomizedArrayIterator() {
+            copiedArray = (Item[]) new Object[N];
+            for (int i = 0; i < N; i++) {
+                copiedArray[i] = array[i];
+            }
+            copiedN = N;
+        }
+
+
+        public boolean hasNext()     {
+            return N>0;
+        }
+        public void remove()         { throw new UnsupportedOperationException();  }
+
+        public Item next() {
+            if (!hasNext()) throw new NoSuchElementException();
+            int randomIndex = StdRandom.uniform(N);
+            Item item = copiedArray[randomIndex];
+            copiedArray[randomIndex] = copiedArray[0];
+            copiedArray[0] = null;
+            copiedN--;
+            return item;
+        }
 
     }
 
