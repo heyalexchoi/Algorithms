@@ -38,6 +38,14 @@ public class Deque<Item> implements Iterable<Item> {
         newFirst.item = item;
         newFirst.previous = null;
         newFirst.next = first;
+
+        if (isEmpty()) {
+            last = newFirst;
+        }
+        else {
+            first.previous = newFirst;
+        }
+
         first = newFirst;
         N++;
     }
@@ -48,26 +56,53 @@ public class Deque<Item> implements Iterable<Item> {
         newLast.item = item;
         newLast.previous = last;
         newLast.next = null;
+
+        if (isEmpty()) {
+            first = newLast;
+        }
+        else {
+            last.next = newLast;
+        }
+
         last = newLast;
         N++;
     }
 
     // delete and return the item at the front
     public Item removeFirst() {
+        if (isEmpty()) throw new NoSuchElementException("Queue underflow");
         Item item = first.item;
         first = first.next;
-        first.previous = null;
         N--;
+        if (isEmpty()) {
+            last = null;
+        }
+        else {
+            first.previous = null;
+        }
         return item;
     }
 
     // delete and return the item at the end
     public Item removeLast() {
+        if (isEmpty()) throw new NoSuchElementException("Queue underflow");
         Item item = last.item;
         last = last.previous;
-        last.next = null;
         N--;
+        if (isEmpty()) {
+            first = null;
+        }
+        else {
+            last.next = null;
+        }
         return item;
+    }
+
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (Item item : this)
+            s.append(item + " ");
+        return s.toString();
     }
 
     // return an iterator over items in order from front to end
@@ -92,6 +127,46 @@ public class Deque<Item> implements Iterable<Item> {
     // unit testing
     public static void main(String[] args)
     {
-        StdOut.println("deque main");
+        Deque<String> deque = new Deque<String>();
+        deque.addFirst("1");
+        StdOut.println("addfirst to string: " + deque.toString());
+        deque.addFirst("2");
+        StdOut.println("addfirst to string: " + deque.toString());
+        deque.addFirst("3");
+        StdOut.println("addfirst to string: " + deque.toString());
+        deque.addFirst("4");
+        StdOut.println("addfirst to string: " + deque.toString());
+        deque.addFirst("5");
+        StdOut.println("addfirst to string: " + deque.toString());
+        deque.removeFirst();
+        StdOut.println("removefirst to string: "+deque.toString());
+        deque.removeFirst();
+        StdOut.println("removefirst to string: "+deque.toString());
+        deque.removeFirst();
+        StdOut.println("removefirst to string: "+deque.toString());
+        deque.removeFirst();
+        StdOut.println("removefirst to string: "+deque.toString());
+        deque.removeFirst();
+        StdOut.println("removefirst to string: "+deque.toString());
+        deque.addLast("1");
+        StdOut.println("addlast to string: "+deque.toString());
+        deque.addLast("2");
+        StdOut.println("addlast to string: "+deque.toString());
+        deque.addLast("3");
+        StdOut.println("addlast to string: "+deque.toString());
+        deque.addLast("4");
+        StdOut.println("addlast to string: "+deque.toString());
+        deque.addLast("5");
+        StdOut.println("addlast to string: "+deque.toString());
+        deque.removeLast();
+        StdOut.println("removelast to string: "+ deque.toString());
+        deque.removeLast();
+        StdOut.println("removelast to string: "+ deque.toString());
+        deque.removeLast();
+        StdOut.println("removelast to string: "+ deque.toString());
+        deque.removeLast();
+        StdOut.println("removelast to string: "+ deque.toString());
+        deque.removeLast();
+        StdOut.println("removelast to string: "+ deque.toString());
     }
 }
