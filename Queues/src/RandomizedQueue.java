@@ -53,8 +53,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
         int randomIndex = StdRandom.uniform(N);
         Item item = array[randomIndex];
-        array[randomIndex] = array[0];
-        array[0] = null;
+        array[randomIndex] = array[N-1];
+        array[N-1] = null;
         N--;
         return item;
     }
@@ -67,6 +67,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         int randomIndex = StdRandom.uniform(N);
         Item item = array[randomIndex];
         return item;
+    }
+
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (Item item : this)
+            s.append(item + " ");
+        return s.toString();
     }
 
     // return an independent iterator over items in random order
@@ -89,16 +96,16 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 
         public boolean hasNext()     {
-            return N>0;
+            return copiedN>0;
         }
         public void remove()         { throw new UnsupportedOperationException();  }
 
         public Item next() {
             if (!hasNext()) throw new NoSuchElementException();
-            int randomIndex = StdRandom.uniform(N);
+            int randomIndex = StdRandom.uniform(copiedN);
             Item item = copiedArray[randomIndex];
-            copiedArray[randomIndex] = copiedArray[0];
-            copiedArray[0] = null;
+            copiedArray[randomIndex] = copiedArray[copiedN-1];
+            copiedArray[copiedN-1] = null;
             copiedN--;
             return item;
         }
@@ -107,6 +114,37 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // unit testing
     public static void main(String[] args) {
+        RandomizedQueue<Integer> queue = new RandomizedQueue();
+        queue.enqueue(1);
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+        queue.enqueue(2);
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+        queue.enqueue(3);
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+        queue.enqueue(4);
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+        queue.enqueue(5);
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+        queue.enqueue(6);
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+        queue.enqueue(7);
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+        queue.enqueue(8);
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+        queue.enqueue(9);
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
+        queue.enqueue(10);
+        StdOut.println(queue.toString());
+        StdOut.println(queue.toString());
 
     }
 }
