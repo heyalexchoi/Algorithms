@@ -1,12 +1,15 @@
+/**
+ * Created by alexchoi1 on 7/2/14.
+ */
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
 public class Deque<Item> implements Iterable<Item> {
 
-    private int N;
-    private Node<Item> first;
-    private Node<Item> last;
+    private int N; // number of elements in Deque
+    private Node<Item> first; // first element in Deque
+    private Node<Item> last; // last element in Deque
 
     // a helper double linked list data type
     private class Node<Item> {
