@@ -56,6 +56,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         array[randomIndex] = array[N-1];
         array[N-1] = null;
         N--;
+        if ( N > 0 && N == array.length/4 ) {
+            resize(array.length/2);
+        }
         return item;
     }
 
@@ -69,7 +72,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         return item;
     }
 
-    public String toString() {
+    private String AXCToString() {
         StringBuilder s = new StringBuilder();
         for (Item item : this)
             s.append(item + " ");
@@ -114,52 +117,52 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // unit testing
     public static void main(String[] args) {
-        RandomizedQueue<Integer> queue = new RandomizedQueue();
+        RandomizedQueue<Integer> queue = new RandomizedQueue<Integer>();
         queue.enqueue(1);
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         queue.enqueue(2);
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         queue.enqueue(3);
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         queue.enqueue(4);
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         queue.enqueue(5);
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         queue.enqueue(6);
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         queue.enqueue(7);
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         queue.enqueue(8);
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         queue.enqueue(9);
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         queue.enqueue(10);
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         StdOut.println(queue.dequeue());
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         StdOut.println(queue.dequeue());
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         StdOut.println(queue.dequeue());
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         StdOut.println(queue.dequeue());
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
         StdOut.println(queue.dequeue());
-        StdOut.println(queue.toString());
-        StdOut.println(queue.toString());
+        StdOut.println(queue.AXCToString());
+        StdOut.println(queue.AXCToString());
 
 
     }

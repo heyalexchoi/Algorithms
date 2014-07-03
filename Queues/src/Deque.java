@@ -103,7 +103,7 @@ public class Deque<Item> implements Iterable<Item> {
         return item;
     }
 
-    public String toString() {
+    private String AXCToString() {
         StringBuilder s = new StringBuilder();
         for (Item item : this)
             s.append(item + " ");
@@ -134,45 +134,45 @@ public class Deque<Item> implements Iterable<Item> {
     {
         Deque<String> deque = new Deque<String>();
         deque.addFirst("1");
-        StdOut.println("addfirst to string: " + deque.toString());
+        StdOut.println("addfirst to string: " + deque.AXCToString());
         deque.addFirst("2");
-        StdOut.println("addfirst to string: " + deque.toString());
+        StdOut.println("addfirst to string: " + deque.AXCToString());
         deque.addFirst("3");
-        StdOut.println("addfirst to string: " + deque.toString());
+        StdOut.println("addfirst to string: " + deque.AXCToString());
         deque.addFirst("4");
-        StdOut.println("addfirst to string: " + deque.toString());
+        StdOut.println("addfirst to string: " + deque.AXCToString());
         deque.addFirst("5");
-        StdOut.println("addfirst to string: " + deque.toString());
+        StdOut.println("addfirst to string: " + deque.AXCToString());
         deque.removeFirst();
-        StdOut.println("removefirst to string: "+deque.toString());
+        StdOut.println("removefirst to string: "+deque.AXCToString());
         deque.removeFirst();
-        StdOut.println("removefirst to string: "+deque.toString());
+        StdOut.println("removefirst to string: "+deque.AXCToString());
         deque.removeFirst();
-        StdOut.println("removefirst to string: "+deque.toString());
+        StdOut.println("removefirst to string: "+deque.AXCToString());
         deque.removeFirst();
-        StdOut.println("removefirst to string: "+deque.toString());
+        StdOut.println("removefirst to string: "+deque.AXCToString());
         deque.removeFirst();
-        StdOut.println("removefirst to string: "+deque.toString());
+        StdOut.println("removefirst to string: "+deque.AXCToString());
         deque.addLast("1");
-        StdOut.println("addlast to string: "+deque.toString());
+        StdOut.println("addlast to string: "+deque.AXCToString());
         deque.addLast("2");
-        StdOut.println("addlast to string: "+deque.toString());
+        StdOut.println("addlast to string: "+deque.AXCToString());
         deque.addLast("3");
-        StdOut.println("addlast to string: "+deque.toString());
+        StdOut.println("addlast to string: "+deque.AXCToString());
         deque.addLast("4");
-        StdOut.println("addlast to string: "+deque.toString());
+        StdOut.println("addlast to string: "+deque.AXCToString());
         deque.addLast("5");
-        StdOut.println("addlast to string: "+deque.toString());
+        StdOut.println("addlast to string: "+deque.AXCToString());
         deque.removeLast();
-        StdOut.println("removelast to string: "+ deque.toString());
+        StdOut.println("removelast to string: "+ deque.AXCToString());
         deque.removeLast();
-        StdOut.println("removelast to string: "+ deque.toString());
+        StdOut.println("removelast to string: "+ deque.AXCToString());
         deque.removeLast();
-        StdOut.println("removelast to string: "+ deque.toString());
+        StdOut.println("removelast to string: "+ deque.AXCToString());
         deque.removeLast();
-        StdOut.println("removelast to string: "+ deque.toString());
+        StdOut.println("removelast to string: "+ deque.AXCToString());
         deque.removeLast();
-        StdOut.println("removelast to string: "+ deque.toString());
+        StdOut.println("removelast to string: "+ deque.AXCToString());
         //deque.addLast(null);
         //deque.addFirst(null);
         ///deque.removeLast();
