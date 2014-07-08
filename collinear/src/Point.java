@@ -1,6 +1,6 @@
 /*************************************************************************
- * Name:
- * Email:
+ * Name: alex choi
+ * Email: heyalexchoi@gmail.com
  *
  * Compilation:  javac Point.java
  * Execution:
@@ -16,7 +16,7 @@ import java.util.Comparator;
 public class Point implements Comparable<Point> {
 
     // compare points by slope
-    public final Comparator<Point> SLOPE_ORDER;       // YOUR DEFINITION HERE
+    public final Comparator<Point> SLOPE_ORDER = new SlopeOrder();
 
     private final int x;                              // x coordinate
     private final int y;                              // y coordinate
@@ -28,6 +28,30 @@ public class Point implements Comparable<Point> {
         this.y = y;
     }
 
+    // The SLOPE_ORDER comparator should compare points
+    // by the slopes they make with the invoking point (x0, y0).
+    // Formally, the point (x1, y1) is less than the point (x2, y2)
+    // if and only if the slope (y1 − y0) / (x1 − x0)
+    // is less than the slope (y2 − y0) / (x2 − x0).
+    // Treat horizontal, vertical, and degenerate line segments
+    // as in the slopeTo() method.
+    private class SlopeOrder implements Comparator<Point> {
+        public int compare(Point a, Point b) {
+            double slopeA = slopeTo(a);
+            double slopeB = slopeTo(b);
+
+            if (slopeA > slopeB) {
+                return 1;
+            }
+            else if (slopeB > slopeA) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        }
+
+    }
     // plot this point to standard drawing
     public void draw() {
         /* DO NOT MODIFY */
@@ -54,6 +78,9 @@ public class Point implements Comparable<Point> {
         // treat the slope of a vertical line segment as positive infinity;
         else if (deltaX == 0) {
             return Double.POSITIVE_INFINITY;
+        }
+        else if (deltaY == 0) {
+            return 0.0; /// ensure return positive zero, and never negative zero
         }
 
         return deltaY/deltaX;
