@@ -41,8 +41,7 @@ public class Brute {
 
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
-
-
+        StdDraw.show();
 
         for (int i = 0; i < N; i++) {
             int x = in.readInt();
@@ -52,16 +51,33 @@ public class Brute {
             point.draw();
         }
 
-        QuickX.sort(pointsArray);
+        Quick.sort(pointsArray);
 
         for (int i = 0; i < N; i++) {
-            Point point  = pointsArray[i];
-            StdOut.println(point.toString());
+            for (int j = i + 1; j < N; j++) {
+                for (int k = j + 1; k < N; k++) {
+                    for (int l =  k + 1; l < N; l++) {
+
+                        Point point1 = pointsArray[i];
+                        Point point2 = pointsArray[j];
+                        Point point3 = pointsArray[k];
+                        Point point4 = pointsArray[l];
+
+                        if (point1.slopeTo(point2) == point2.slopeTo(point3)
+                                && point2.slopeTo(point3) == point3.slopeTo(point4)
+                                && point1.compareTo(point2) == point2.compareTo(point3)
+                                && point2.compareTo(point3) == point3.compareTo(point4)) {
+
+                            StdOut.println(point1.toString()
+                                    + " -> " + point2.toString()
+                                    + " -> " + point3.toString()
+                                    + " -> " + point4.toString());
+
+                            point1.drawTo(point4);
+                        }
+                    }
+                }
+            }
         }
-
-
-        // display to screen all at once
-        StdDraw.show(0);
-
     }
 }
