@@ -44,6 +44,8 @@ public class Fast {
             // add point i as origin
             segment.add(naturalPoint);
 
+            // index 0 in slope order sorted is always the origin point (slope negative infinity)
+            // this loop compares i to j and i to j+1. j only needs to loop through N-2
             for (int j = 1; j < N-1; j++) {
 
                 Point slopePoint = slopeOrderPoints[j];
@@ -59,17 +61,12 @@ public class Fast {
                     segment.add(nextSlopePoint);
                 }
 
-                // segment is sufficient size
-                if (segment.size() > 3
-                        // segment terminates either bc end of loop or no more slope match
-                        && (j == N-2 || slope != nextSlope)) {
-                    outputSegment(segment,outputtedPoints);
-                    segment.clear();
-                    segment.add(naturalPoint);
-                }
-
-                // clear segment if no match (end of segment)
-                if (slope != nextSlope) {
+                // clear segment if no match (end of segment or loop)
+                if (slope != nextSlope || j == N-2) {
+                    // first output segment if it is large enough
+                    if (segment.size() > 3) {
+                        outputSegment(segment,outputtedPoints);
+                    }
                     segment.clear();
                     segment.add(naturalPoint);
                 }
