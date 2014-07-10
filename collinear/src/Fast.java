@@ -14,7 +14,6 @@ public class Fast {
 
         int N = input.readInt();
         Point[] naturalOrderPoints = new Point[N];
-        HashSet<Point> outputtedPoints = new HashSet<Point>();
 
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
@@ -65,7 +64,7 @@ public class Fast {
                 if (slope != nextSlope || j == N-2) {
                     // first output segment if it is large enough
                     if (segment.size() > 3) {
-                        outputSegment(segment,outputtedPoints);
+                        outputSegment(segment);
                     }
                     segment.clear();
                     segment.add(naturalPoint);
@@ -74,24 +73,32 @@ public class Fast {
         }
     }
 
-    private static void outputSegment(LinkedList<Point> segment, HashSet<Point> outputtedPoints) {
-        //hashset addAll returns true if any unique objects were added
-        boolean containsUnique = outputtedPoints.addAll(segment);
+    private static void outputSegment(LinkedList<Point> segment) {
+        // to remove sub-segments, we rely on the following logic:
+        // the outer loop's array is sorted via natural order
+        // the inner loop is sorted in slope order according
+        // to the current number in the outer loop
+        // a discovered segment should always start at
+        // its naturally lowest point
+        // in the case of a sub-segment, the outer loop will
+        // start the segment at somewhere other than its lowest
+        // in this case, we can discover this by comparing
+        // whether the first point of the segment is in fact the lowest
 
-        if (containsUnique) {
-            Point start = segment.peekFirst();
-            Point end = segment.peekLast();
-            start.drawTo(end);
+        Point first = segment.removeFirst();
+        Point second = segment.removeFirst();
+        Point last = segment.removeLast();
+        if (first.compareTo(second) == -1) {
+
+            first.drawTo(last);
+            StdOut.print(first + " -> " + second + " -> ");
 
             for (Point point : segment) {
-                if (point != end) {
-                    StdOut.print(point + " -> ");
-                }
-                else {
-                    StdOut.print(point);
-                    StdOut.println();
-                }
+                StdOut.print(point + " -> ");
             }
+
+            StdOut.print(last);
+            StdOut.println();
         }
     }
 }
