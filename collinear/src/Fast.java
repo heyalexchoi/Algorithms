@@ -88,7 +88,7 @@ public class Fast {
         Point first = segment.removeFirst();
         Point second = segment.removeFirst();
         Point last = segment.removeLast();
-        if (first.compareTo(second) == -1) {
+        if (first.compareTo(second) < 0) {
 
             first.drawTo(last);
             StdOut.print(first + " -> " + second + " -> ");
