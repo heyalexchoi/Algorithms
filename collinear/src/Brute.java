@@ -31,6 +31,9 @@
  * StdDraw.setXscale(0, 32768) and StdDraw.setYscale(0, 32768)
  * to rescale the coordinate system.
  */
+
+import java.util.Arrays;
+
 public class Brute {
     public static void main(String[] args) {
 
@@ -51,7 +54,7 @@ public class Brute {
             point.draw();
         }
 
-        Quick.sort(pointsArray);
+        Arrays.sort(pointsArray);
 
         for (int i = 0; i < N; i++) {
             for (int j = i + 1; j < N; j++) {
@@ -65,8 +68,9 @@ public class Brute {
 
                         if (point1.slopeTo(point2) == point2.slopeTo(point3)
                                 && point2.slopeTo(point3) == point3.slopeTo(point4)
-                                && point1.compareTo(point2) == point2.compareTo(point3)
-                                && point2.compareTo(point3) == point3.compareTo(point4)) {
+                                && point1.compareTo(point2) < 1
+                                && point2.compareTo(point3) < 1
+                                && point3.compareTo(point4) < 1) {
 
                             StdOut.println(point1.toString()
                                     + " -> " + point2.toString()
