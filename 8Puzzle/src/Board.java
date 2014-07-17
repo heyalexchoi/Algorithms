@@ -1,18 +1,13 @@
 /**
  * Created by alexchoi1 on 7/17/14.
  */
+import java.util.Arrays;
 
-/*
- // returns 1-D array index for 2-D array index pair
-    // row i, column j
-    private int indexForCoordinates(int i, int j) {
-        return (i * N) + j;
-    }
- */
+
 public class Board {
 
     // array representation of Board
-    private char[][] board;
+    private final char[][] board;
     // length/width of Board
     private final char N;
     // cached manhattan distance value. init -1, to mark that distance has not been calculated yet
@@ -98,6 +93,7 @@ public class Board {
                distance += Math.abs(goalCoordinates.i - i) + Math.abs(goalCoordinates.j - j);
            }
         }
+        manhattan = distance; // cache distance
         return distance;
     }
 
@@ -125,7 +121,11 @@ public class Board {
 
     // does this board equal y?
     public boolean equals(Object y) {
-        return false;
+        if (y == this) return true;
+        if (y == null) return false;
+        if (y.getClass() != this.getClass())  return false;
+        Board that = (Board)y;
+        return Arrays.deepEquals(this.board, that.board);
     }
 
     // all neighboring boards
