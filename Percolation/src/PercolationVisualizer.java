@@ -18,6 +18,7 @@
 
 import java.awt.Font;
 
+
 public class PercolationVisualizer {
 
     // delay in miliseconds (controls animation speed)
