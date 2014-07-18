@@ -5,13 +5,19 @@ import java.util.Arrays;
 
 
 public class Board {
-
+    // class used to store coordinate pairs
+    private class coordinatePair {
+        char i;
+        char j;
+    }
     // array representation of Board
     private final char[][] board;
     // length/width of Board
     private final char N;
     // cached manhattan distance value. init -1, to mark that distance has not been calculated yet
     private int manhattan = -1;
+    // cached location of the blank square
+    private coordinatePair blankSquare;
 
     // construct a board from an N-by-N array of blocks
     // (where blocks[i][j] = block in row i, column j)
@@ -23,8 +29,13 @@ public class Board {
             // for each column j
             for (char j = 0; j < N; j++) {
                 board[i][j] = (char)blocks[i][j];
+                // cache blank square location
+                if (blocks[i][j] == 0) {
+                    blankSquare.i = i;
+                    blankSquare.j = j;
                 }
             }
+        }
     }
 
     // board dimension N
@@ -56,11 +67,6 @@ public class Board {
         return count;
     }
 
-    // class used to store coordinate pairs to calculate manhattan distance
-    private class coordinatePair {
-        char i;
-        char j;
-    }
     // function used to calculate manhattan distance
     // returns inverse of goal(): the i,j coordinate pair for a goal value
     private coordinatePair coordinatesForGoalValue(char value) {
@@ -86,12 +92,12 @@ public class Board {
         int distance = 0;
 
         for (char i = 0; i < N; i ++) {
-           for (char j = 0; j < N; j++) {
-               // compare board coordinates to goal coordinates for each board/goal value
-               char boardValue = board[i][j];
-               coordinatePair goalCoordinates = coordinatesForGoalValue(boardValue);
-               distance += Math.abs(goalCoordinates.i - i) + Math.abs(goalCoordinates.j - j);
-           }
+            for (char j = 0; j < N; j++) {
+                // compare board coordinates to goal coordinates for each board/goal value
+                char boardValue = board[i][j];
+                coordinatePair goalCoordinates = coordinatesForGoalValue(boardValue);
+                distance += Math.abs(goalCoordinates.i - i) + Math.abs(goalCoordinates.j - j);
+            }
         }
         manhattan = distance; // cache distance
         return distance;
@@ -104,7 +110,6 @@ public class Board {
 
     // a board obtained by exchanging two adjacent blocks in the same row
     public Board twin() {
-
         // copy our board
         int[][] blocks = new int[N][N];
         for (int i = 0; i < N; i++) {
@@ -130,11 +135,60 @@ public class Board {
 
     // all neighboring boards
     public Iterable<Board> neighbors() {
-        return new Stack<Board>();
+        Stack stack = new Stack<Board>();
+        // copy our board as int arrays
+        int[][] boardCopy = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                boardCopy[i][j] = board[i][j];
+            }
+        }
+        // blank square not left edge
+        if (blankSquare.j > 0) {
+            // create board with blank switched with left neighbor; push to stack
+            int[][] blocks = boardCopy.clone();
+            blocks[blankSquare.i][blankSquare.j] = board[blankSquare.i][blankSquare.j-1];
+            blocks[blankSquare.i][blankSquare.j-1] = board[blankSquare.i][blankSquare.j];
+            stack.push(new Board(blocks));
+        }
+        // blank square not right edge
+        if (blankSquare.j < N-1) {
+            // create board with blank switched with right neighbor; push to stack
+            int[][] blocks = boardCopy.clone();
+            blocks[blankSquare.i][blankSquare.j] = board[blankSquare.i][blankSquare.j+1];
+            blocks[blankSquare.i][blankSquare.j+1] = board[blankSquare.i][blankSquare.j];
+            stack.push(new Board(blocks));
+        }
+        // blank square not top edge
+        if (blankSquare.i > 0) {
+            // create board with blank switched with top neighbor; push to stack
+            int[][] blocks = boardCopy.clone();
+            blocks[blankSquare.i][blankSquare.j] = board[blankSquare.i-1][blankSquare.j];
+            blocks[blankSquare.i-1][blankSquare.j] = board[blankSquare.i][blankSquare.j];
+            stack.push(new Board(blocks));
+        }
+        // blank square not bottom edge
+        if (blankSquare.i < N-1) {
+            // create board with blank switched with bottom neighbor; push to stack
+            int[][] blocks = boardCopy.clone();
+            blocks[blankSquare.i][blankSquare.j] = board[blankSquare.i+1][blankSquare.j];
+            blocks[blankSquare.i+1][blankSquare.j] = board[blankSquare.i][blankSquare.j];
+            stack.push(new Board(blocks));
+        }
+
+        return stack;
     }
 
     // string representation of the board (in the output format specified below)
     public String toString() {
-        return "";
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(N + "\n");
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                stringBuilder.append(board[i][j] + " ");
+            }
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
     }
 }
