@@ -62,7 +62,7 @@ public class Board {
 
         for (char i = 0; i < N; i++) {
             for (char j = 0; j < N; j++) {
-                if (board[i][j] != goal(i,j)) {
+                if (board[i][j] != 0 && board[i][j] != goal(i,j)) {
                     count++;
                 }
             }
