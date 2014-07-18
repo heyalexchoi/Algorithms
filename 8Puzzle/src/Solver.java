@@ -67,10 +67,12 @@ public class Solver {
                 }
                 Node next = new Node(neighbor, min.moves + 1, min);
                 searchPriorityQueue.insert(next);
+                /*
                 StdOut.println("INSERT NODE\n" + "PRIORITY: " + next.priority
                         + "\nMOVES: " + next.moves
                         + "\nMANHATTAN: " + next.board.manhattan()
                         + "\n" + next.board.toString());
+                        */
             }
             for (Board twinNeighbor : twinNeighbors) {
                 if (twinMin.previous != null && twinNeighbor.equals(twinMin.previous.board)) {
@@ -82,7 +84,8 @@ public class Solver {
         }
         StdOut.println("FINISHED SOLVING");
         if (searchPriorityQueue.min().board.isGoal()) {
-            StdOut.println("board was solved:\n" + searchPriorityQueue.min().board);
+            StdOut.println("board was solved:\n" + searchPriorityQueue.min().board
+            + "moves: " + searchPriorityQueue.min().moves);
         }
         if (twinPriorityQueue.min().board.isGoal()) {
             StdOut.println("twin board was solved: \n" + twinPriorityQueue.min().board);
