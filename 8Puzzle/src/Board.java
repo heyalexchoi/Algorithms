@@ -192,7 +192,7 @@ public class Board {
     // string representation of the board (in the output format specified below)
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(N + "\n");
+        stringBuilder.append((int)N + "\n");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
                 stringBuilder.append(String.format("%d ", (int)board[i][j]));

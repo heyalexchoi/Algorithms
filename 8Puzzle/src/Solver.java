@@ -26,6 +26,14 @@ public class Solver {
             }
             return 0;
         }
+        public String toString() {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("\nMoves:" + moves);
+            stringBuilder.append("\nManhattan:" + board.manhattan());
+            stringBuilder.append("\nPriority:" + priority);
+            stringBuilder.append("\nBoard:" + board);
+            return stringBuilder.toString();
+        }
     }
     // If initial board's twin reaches goal, intial board is not solvable
     private boolean isSolvable;
@@ -51,11 +59,6 @@ public class Solver {
             // with the minimum priority
             Node min = searchPriorityQueue.delMin();
             Node twinMin = twinPriorityQueue.delMin();
-            StdOut.println("--------------------------------------------------" +
-                    "MIN\n" + "PRIORITY: " + min.priority
-                    + "\nMOVES: " + min.moves
-                    + "\nMANHATTAN: " + min.board.manhattan()
-                    + "\n" + min.board.toString());
             // , and insert onto the priority queue all neighboring search nodes
             Iterable<Board> neighbors = min.board.neighbors();
             Iterable<Board> twinNeighbors = twinMin.board.neighbors();
@@ -67,12 +70,6 @@ public class Solver {
                 }
                 Node next = new Node(neighbor, min.moves + 1, min);
                 searchPriorityQueue.insert(next);
-                /*
-                StdOut.println("INSERT NODE\n" + "PRIORITY: " + next.priority
-                        + "\nMOVES: " + next.moves
-                        + "\nMANHATTAN: " + next.board.manhattan()
-                        + "\n" + next.board.toString());
-                        */
             }
             for (Board twinNeighbor : twinNeighbors) {
                 if (twinMin.previous != null && twinNeighbor.equals(twinMin.previous.board)) {
@@ -82,13 +79,16 @@ public class Solver {
                 twinPriorityQueue.insert(twinNext);
             }
         }
-        StdOut.println("FINISHED SOLVING");
+
         if (searchPriorityQueue.min().board.isGoal()) {
-            StdOut.println("board was solved:\n" + searchPriorityQueue.min().board
-            + "moves: " + searchPriorityQueue.min().moves);
+            moves = searchPriorityQueue.min().moves;
+            isSolvable = true;
+
         }
         if (twinPriorityQueue.min().board.isGoal()) {
-            StdOut.println("twin board was solved: \n" + twinPriorityQueue.min().board);
+            moves = -1;
+            isSolvable = false;
+
         }
     }
 
@@ -104,7 +104,19 @@ public class Solver {
 
     // sequence of boards in a shortest solution; null if no solution
     public Iterable<Board> solution() {
-        return new Stack<Board>();
+        // if no solution, return null
+        if (!isSolvable) return null;
+        // create solution stack
+        Stack<Board> solution = new Stack<Board>();
+        // start with solution node
+        Node node = searchPriorityQueue.min();
+        // loop our way back to first node, adding boards to solution
+        while (node != null) {
+            solution.push(node.board);
+            node = node.previous;
+        }
+
+        return solution;
     }
 
     // solve a slider puzzle (given below)
@@ -119,27 +131,9 @@ public class Solver {
                 blocks[i][j] = in.readInt();
             }
         }
-
+        // board from input blocks
         Board board = new Board(blocks);
-        /*
-        StdOut.print(board.toString());
-        StdOut.println("dimension: "+board.dimension());
-        StdOut.println("hamming: "+board.hamming());
-        StdOut.println("manhattan: "+board.manhattan());
-        StdOut.println("isgoal: "+board.isGoal());
-        StdOut.println("twin: "+board.twin().toString());
-        StdOut.println("equals twin: "+board.equals(board.twin()));
-        StdOut.println("neighbors: "+board.neighbors());
-        Iterable<Board> neighbors = board.neighbors();
-        for (Board eachBoard : neighbors) {
-            StdOut.println("neighbor equals twin?"+ eachBoard.equals(board.twin()));
-        }
-        */
-
-
         // solve the puzzle
-
-
         Solver solver = new Solver(board);
 
         // print solution to standard output
@@ -148,11 +142,7 @@ public class Solver {
         else {
             StdOut.println("Minimum number of moves = " + solver.moves());
             for (Board eachBoard : solver.solution())
-                StdOut.println(board);
+                StdOut.println(eachBoard);
         }
-
-
-
-
     }
 }
