@@ -27,20 +27,15 @@ public class Solver {
             return 0;
         }
     }
-
+    // If initial board's twin reaches goal, intial board is not solvable
     private boolean isSolvable;
+    // moves required for initial board to reach goal
     private int moves;
     // priority queue of search nodes
     private MinPQ<Node> searchPriorityQueue;
     // priority queue for searching twin of initial board
     // to determine solvability of initial
     private MinPQ<Node> twinPriorityQueue;
-
-
-
-
-
-
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
         searchPriorityQueue = new MinPQ<Node>();
@@ -48,12 +43,10 @@ public class Solver {
         //First, insert the initial search node into a priority queue.
         searchPriorityQueue.insert(new Node(initial, 0, null));
         twinPriorityQueue.insert(new Node(initial.twin(), 0, null));
-        /*
+
         // loop until one of the queues is solved
         while (!searchPriorityQueue.min().board.isGoal()
                 && !twinPriorityQueue.min().board.isGoal()) {
-                */
-        for (int i = 0; i < 5; i++) {
             //Then, delete from the priority queue the search node
             // with the minimum priority
             Node min = searchPriorityQueue.delMin();
@@ -89,10 +82,10 @@ public class Solver {
         }
         StdOut.println("FINISHED SOLVING");
         if (searchPriorityQueue.min().board.isGoal()) {
-            StdOut.println("board was solved");
+            StdOut.println("board was solved:\n" + searchPriorityQueue.min().board);
         }
         if (twinPriorityQueue.min().board.isGoal()) {
-            StdOut.println("twin board was solved");
+            StdOut.println("twin board was solved: \n" + twinPriorityQueue.min().board);
         }
     }
 

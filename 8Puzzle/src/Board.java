@@ -113,13 +113,20 @@ public class Board {
     }
 
     // a board obtained by exchanging two adjacent blocks in the same row
+    // (BLANK DOES NOT COUNT)
     public Board twin() {
         // copy our board
-        int[][] blocks = boardBlocks();
-        // switch first two blocks
-        blocks[0][0] = board[0][1];
-        blocks[0][1] = board[0][0];
-
+        int[][] blocks = copyBoard();
+        // if neither of the first two blocks are blank,
+        if (blocks[0][0] != 0 && blocks[0][1] != 0) {
+            // switch first two blocks
+            blocks[0][0] = board[0][1];
+            blocks[0][1] = board[0][0];
+        } else {
+            // otherwise, switch first two blocks on second row
+            blocks[1][0] = board[1][1];
+            blocks[1][1] = board[1][0];
+        }
         return new Board(blocks);
     }
 
@@ -132,7 +139,7 @@ public class Board {
         return Arrays.deepEquals(this.board, that.board);
     }
 
-    private int[][] boardBlocks() {
+    private int[][] copyBoard() {
         int[][] boardCopy = new int[N][N];
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
@@ -149,7 +156,7 @@ public class Board {
         // blank square not left edge
         if (blankSquare.j > 0) {
             // create board with blank switched with left neighbor; push to stack
-            int[][] blocks = boardBlocks();
+            int[][] blocks = copyBoard();
             blocks[blankSquare.i][blankSquare.j] = board[blankSquare.i][blankSquare.j-1];
             blocks[blankSquare.i][blankSquare.j-1] = board[blankSquare.i][blankSquare.j];
             stack.push(new Board(blocks));
@@ -157,7 +164,7 @@ public class Board {
         // blank square not right edge
         if (blankSquare.j < N-1) {
             // create board with blank switched with right neighbor; push to stack
-            int[][] blocks = boardBlocks();
+            int[][] blocks = copyBoard();
             blocks[blankSquare.i][blankSquare.j] = board[blankSquare.i][blankSquare.j+1];
             blocks[blankSquare.i][blankSquare.j+1] = board[blankSquare.i][blankSquare.j];
             stack.push(new Board(blocks));
@@ -165,7 +172,7 @@ public class Board {
         // blank square not top edge
         if (blankSquare.i > 0) {
             // create board with blank switched with top neighbor; push to stack
-            int[][] blocks = boardBlocks();
+            int[][] blocks = copyBoard();
             blocks[blankSquare.i][blankSquare.j] = board[blankSquare.i-1][blankSquare.j];
             blocks[blankSquare.i-1][blankSquare.j] = board[blankSquare.i][blankSquare.j];
             stack.push(new Board(blocks));
@@ -173,7 +180,7 @@ public class Board {
         // blank square not bottom edge
         if (blankSquare.i < N-1) {
             // create board with blank switched with bottom neighbor; push to stack
-            int[][] blocks = boardBlocks();
+            int[][] blocks = copyBoard();
             blocks[blankSquare.i][blankSquare.j] = board[blankSquare.i+1][blankSquare.j];
             blocks[blankSquare.i+1][blankSquare.j] = board[blankSquare.i][blankSquare.j];
             stack.push(new Board(blocks));
