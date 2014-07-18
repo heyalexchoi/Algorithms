@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Board {
     // class used to store coordinate pairs
-    private class coordinatePair {
+    private class CoordinatePair {
         char i;
         char j;
     }
@@ -15,15 +15,18 @@ public class Board {
     // length/width of Board
     private final char N;
     // cached manhattan distance value. init -1, to mark that distance has not been calculated yet
-    private int manhattan = -1;
+    private int manhattan;
     // cached location of the blank square
-    private coordinatePair blankSquare;
+    private CoordinatePair blankSquare;
 
     // construct a board from an N-by-N array of blocks
     // (where blocks[i][j] = block in row i, column j)
     public Board(int[][] blocks) {
         N = (char)blocks.length;
-        this.board = new char[N][N];
+        board = new char[N][N];
+        manhattan = -1;
+        blankSquare = new CoordinatePair();
+
         // for each row i
         for (char i = 0; i < N; i++) {
             // for each column j
@@ -69,8 +72,8 @@ public class Board {
 
     // function used to calculate manhattan distance
     // returns inverse of goal(): the i,j coordinate pair for a goal value
-    private coordinatePair coordinatesForGoalValue(char value) {
-        coordinatePair pair = new coordinatePair();
+    private CoordinatePair coordinatesForGoalValue(char value) {
+        CoordinatePair pair = new CoordinatePair();
         if (value == 0) {
             pair.i = (char)(N - 1);
             pair.j = (char)(N - 1);
@@ -95,7 +98,7 @@ public class Board {
             for (char j = 0; j < N; j++) {
                 // compare board coordinates to goal coordinates for each board/goal value
                 char boardValue = board[i][j];
-                coordinatePair goalCoordinates = coordinatesForGoalValue(boardValue);
+                CoordinatePair goalCoordinates = coordinatesForGoalValue(boardValue);
                 distance += Math.abs(goalCoordinates.i - i) + Math.abs(goalCoordinates.j - j);
             }
         }
@@ -135,7 +138,7 @@ public class Board {
 
     // all neighboring boards
     public Iterable<Board> neighbors() {
-        Stack stack = new Stack<Board>();
+        Stack<Board> stack = new Stack<Board>();
         // copy our board as int arrays
         int[][] boardCopy = new int[N][N];
         for (int i = 0; i < N; i++) {
@@ -185,7 +188,7 @@ public class Board {
         stringBuilder.append(N + "\n");
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                stringBuilder.append(board[i][j] + " ");
+                stringBuilder.append(String.format("%d ", (int)board[i][j]));
             }
             stringBuilder.append("\n");
         }

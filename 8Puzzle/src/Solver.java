@@ -29,13 +29,16 @@ public class Solver {
     public static void main(String[] args) {
         String fileName = args[0];
         In in = new In(fileName);
+        //StdOut.println("fileName"+fileName);
         int N = in.readInt();
+        //StdOut.println("N"+N);
 
         int[][] blocks = new int[N][N];
 
         for (int i = 0; i < N; i++) {
             for (int j=0; j < N; j++) {
                 blocks[i][j] = in.readInt();
+                //StdOut.println("\ni: "+i+"\nj: "+j+"\nvalue: "+blocks[i][j]);
             }
         }
 
