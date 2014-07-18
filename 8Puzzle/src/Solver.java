@@ -2,6 +2,7 @@
  * Created by alexchoi1 on 7/17/14.
  */
 
+
 public class Solver {
 
     // find a solution to the initial board (using the A* algorithm)
@@ -26,6 +27,19 @@ public class Solver {
 
     // solve a slider puzzle (given below)
     public static void main(String[] args) {
+        String fileName = args[0];
+        In in = new In(fileName);
+        int N = in.readInt();
 
+        int[][] blocks = new int[N][N];
+
+        for (int i = 0; i < N; i++) {
+            for (int j=0; j < N; j++) {
+                blocks[i][j] = in.readInt();
+            }
+        }
+
+        Board board = new Board(blocks);
+        StdOut.print(board.toString());
     }
 }
