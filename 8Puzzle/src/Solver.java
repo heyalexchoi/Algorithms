@@ -29,20 +29,23 @@ public class Solver {
     public static void main(String[] args) {
         String fileName = args[0];
         In in = new In(fileName);
-        //StdOut.println("fileName"+fileName);
         int N = in.readInt();
-        //StdOut.println("N"+N);
-
         int[][] blocks = new int[N][N];
 
         for (int i = 0; i < N; i++) {
             for (int j=0; j < N; j++) {
                 blocks[i][j] = in.readInt();
-                //StdOut.println("\ni: "+i+"\nj: "+j+"\nvalue: "+blocks[i][j]);
             }
         }
 
         Board board = new Board(blocks);
         StdOut.print(board.toString());
+        StdOut.println("dimension: "+board.dimension());
+        StdOut.println("hamming: "+board.hamming());
+        StdOut.println("manhattan: "+board.manhattan());
+        StdOut.println("isgoal: "+board.isGoal());
+        StdOut.println("twin: "+board.twin().toString());
+        StdOut.println("equals twin: "+board.equals(board.twin()));
+        StdOut.println("neighbors: "+board.neighbors());
     }
 }
