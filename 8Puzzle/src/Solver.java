@@ -5,19 +5,76 @@
 
 public class Solver {
 
+    // search node
+    private class Node {
+        final Board board;
+        final int moves;
+        final Node previous;
+        Node(Board board, int moves, Node previous) {
+            this.board = board;
+            this.moves = moves;
+            this.previous = previous;
+        }
+    }
+
+    private boolean isSolvable;
+    private int moves;
+    // priority queue of search nodes
+    private MinPQ<Node> searchPriorityQueue;
+    // priority queue for searching twin of initial board
+    // to determine solvability of initial
+    private MinPQ<Node> twinPriorityQueue;
+
+
+
+
+
+
     // find a solution to the initial board (using the A* algorithm)
     public Solver(Board initial) {
-
+        searchPriorityQueue = new MinPQ<Node>();
+        twinPriorityQueue = new MinPQ<Node>();
+        //First, insert the initial search node into a priority queue.
+        searchPriorityQueue.insert(new Node(initial, 0, null));
+        twinPriorityQueue.insert(new Node(initial.twin(), 0, null));
+        // loop until one of the queues is solved
+        while (!searchPriorityQueue.min().board.isGoal()
+                && !twinPriorityQueue.min().board.isGoal()) {
+            //Then, delete from the priority queue the search node
+            // with the minimum priority
+            Node min = searchPriorityQueue.delMin();
+            Node twinMin = twinPriorityQueue.delMin();
+            // , and insert onto the priority queue all neighboring search nodes
+            Iterable<Board> neighbors = min.board.neighbors();
+            Iterable<Board> twinNeighbors = twinMin.board.neighbors();
+            for (Board neighbor : neighbors) {
+                // don't enqueue a neighbor if its board is the
+                // same as the board of the previous search node.
+                if (neighbor.equals(min.previous.board)) {
+                    continue;
+                }
+                Node next = new Node(neighbor, min.moves + 1, min);
+                searchPriorityQueue.insert(next);
+            }
+            for (Board twinNeighbor : twinNeighbors) {
+                if (twinNeighbor.equals(twinMin.previous.board)) {
+                    continue;
+                }
+                Node twinNext = new Node(twinNeighbor, twinMin.moves + 1, twinMin);
+                twinPriorityQueue.insert(twinNext);
+            }
+        }
+        StdOut.println("FINISHED SOLVING");
     }
 
     // is the initial board solvable?
     public boolean isSolvable() {
-        return false;
+        return isSolvable;
     }
 
     // min number of moves to solve initial board; -1 if no solution
     public int moves() {
-        return 0;
+        return moves;
     }
 
     // sequence of boards in a shortest solution; null if no solution
@@ -50,6 +107,18 @@ public class Solver {
         Iterable<Board> neighbors = board.neighbors();
         for (Board eachBoard : neighbors) {
             StdOut.println("neighbor equals twin?"+ eachBoard.equals(board.twin()));
+        }
+
+        // solve the puzzle
+        Solver solver = new Solver(board);
+
+        // print solution to standard output
+        if (!solver.isSolvable())
+            StdOut.println("No solution possible");
+        else {
+            StdOut.println("Minimum number of moves = " + solver.moves());
+            for (Board eachBoard : solver.solution())
+                StdOut.println(board);
         }
 
 
