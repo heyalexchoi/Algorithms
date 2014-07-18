@@ -98,6 +98,7 @@ public class Board {
             for (char j = 0; j < N; j++) {
                 // compare board coordinates to goal coordinates for each board/goal value
                 char boardValue = board[i][j];
+                if (boardValue == 0) { continue; } // don't do it for zero
                 CoordinatePair goalCoordinates = coordinatesForGoalValue(boardValue);
                 distance += Math.abs(goalCoordinates.i - i) + Math.abs(goalCoordinates.j - j);
             }
@@ -114,12 +115,7 @@ public class Board {
     // a board obtained by exchanging two adjacent blocks in the same row
     public Board twin() {
         // copy our board
-        int[][] blocks = new int[N][N];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                blocks[i][j] = board[i][j];
-            }
-        }
+        int[][] blocks = boardBlocks();
         // switch first two blocks
         blocks[0][0] = board[0][1];
         blocks[0][1] = board[0][0];

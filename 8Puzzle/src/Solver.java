@@ -47,5 +47,13 @@ public class Solver {
         StdOut.println("twin: "+board.twin().toString());
         StdOut.println("equals twin: "+board.equals(board.twin()));
         StdOut.println("neighbors: "+board.neighbors());
+        Iterable<Board> neighbors = board.neighbors();
+        for (Board eachBoard : neighbors) {
+            StdOut.println("neighbor equals twin?"+ eachBoard.equals(board.twin()));
+        }
+
+
+
+
     }
 }
