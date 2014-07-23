@@ -23,13 +23,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PointSET.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PointSET.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PointSET.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.19669117" vertical-offset="976" max-vertical-offset="1520">
-              <caret line="57" column="2" selection-start-line="57" selection-start-column="2" selection-end-line="57" selection-end-column="2" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1520">
+              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
               <folding>
-                <element signature="e#161#162#0" expanded="true" />
                 <element signature="e#201#202#0" expanded="true" />
                 <element signature="e#257#258#0" expanded="true" />
                 <element signature="e#293#294#0" expanded="true" />
@@ -43,10 +42,28 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="KdTree.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/KdTree.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.5018382" vertical-offset="1318" max-vertical-offset="3876">
+              <caret line="55" column="12" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
+              <folding>
+                <element signature="e#1195#1196#0" expanded="true" />
+                <element signature="e#1227#1228#0" expanded="true" />
+                <element signature="e#1286#1287#0" expanded="true" />
+                <element signature="e#1313#1314#0" expanded="true" />
+                <element signature="e#5448#5449#0" expanded="true" />
+                <element signature="e#5486#5487#0" expanded="true" />
+                <element signature="e#5787#5796#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="RectHV.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/RectHV.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="942" max-vertical-offset="1767">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1767">
               <caret line="31" column="40" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
               <folding>
                 <element signature="e#1808#1809#0" expanded="true" />
@@ -70,6 +87,7 @@
       <list>
         <option value="$PROJECT_DIR$/src/RectHV.java" />
         <option value="$PROJECT_DIR$/src/PointSET.java" />
+        <option value="$PROJECT_DIR$/src/KdTree.java" />
       </list>
     </option>
   </component>
@@ -402,7 +420,23 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="95" max-vertical-offset="209">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding>
-            <element signature="e#161#162#0" expanded="true" />
+            <element signature="e#201#202#0" expanded="true" />
+            <element signature="e#257#258#0" expanded="true" />
+            <element signature="e#293#294#0" expanded="true" />
+            <element signature="e#352#353#0" expanded="true" />
+            <element signature="e#385#386#0" expanded="true" />
+            <element signature="e#643#644#0" expanded="true" />
+            <element signature="e#681#682#0" expanded="true" />
+            <element signature="e#982#991#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PointSET.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1520">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+          <folding>
             <element signature="e#201#202#0" expanded="true" />
             <element signature="e#257#258#0" expanded="true" />
             <element signature="e#293#294#0" expanded="true" />
@@ -428,20 +462,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PointSET.java">
+    <entry file="file://$PROJECT_DIR$/src/KdTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19669117" vertical-offset="976" max-vertical-offset="1520">
-          <caret line="57" column="2" selection-start-line="57" selection-start-column="2" selection-end-line="57" selection-end-column="2" />
+        <state vertical-scroll-proportion="-0.5018382" vertical-offset="1318" max-vertical-offset="3876">
+          <caret line="55" column="12" selection-start-line="55" selection-start-column="12" selection-end-line="55" selection-end-column="12" />
           <folding>
-            <element signature="e#161#162#0" expanded="true" />
-            <element signature="e#201#202#0" expanded="true" />
-            <element signature="e#257#258#0" expanded="true" />
-            <element signature="e#293#294#0" expanded="true" />
-            <element signature="e#352#353#0" expanded="true" />
-            <element signature="e#385#386#0" expanded="true" />
-            <element signature="e#643#644#0" expanded="true" />
-            <element signature="e#681#682#0" expanded="true" />
-            <element signature="e#982#991#0" expanded="true" />
+            <element signature="e#1195#1196#0" expanded="true" />
+            <element signature="e#1227#1228#0" expanded="true" />
+            <element signature="e#1286#1287#0" expanded="true" />
+            <element signature="e#1313#1314#0" expanded="true" />
+            <element signature="e#5448#5449#0" expanded="true" />
+            <element signature="e#5486#5487#0" expanded="true" />
+            <element signature="e#5787#5796#0" expanded="true" />
           </folding>
         </state>
       </provider>
