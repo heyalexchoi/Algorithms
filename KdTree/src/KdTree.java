@@ -99,7 +99,7 @@ public class KdTree {
         if (root == null) {
             root = new Node(p, new RectHV(0,0,1,1));
         }
-        // node we compare with point p
+        // node we compare with point p. start at root
         Node node = root;
         // value we compare with, alternates between x an y
         boolean compareX = true;
@@ -172,8 +172,27 @@ public class KdTree {
 
     // does the set contain the point p?
     public boolean contains(Point2D p) {
-        return set.contains(p);
+        // node we compare with point p. start at root
+        Node node = root;
+        // value we compare with, alternates between x an y
+        boolean compareX = true;
+
+        while (true) {
+            if (node == null) return false;
+            if (node.point.equals(p)) return true;
+
+            if ((compareX && (p.x() < node.point.x()))
+                || (!compareX && (p.y() < node.point.y()))) {
+                    node = node.leftBottom;
+            }
+            else {
+                    node = node.rightTop;
+            }
+            compareX = !compareX;
+            continue;
+        }
     }
+
     // draw all of the points to standard draw
     public void draw() {
         for (Point2D point : set) {
