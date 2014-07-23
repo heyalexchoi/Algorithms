@@ -58,7 +58,7 @@ public class KdTree {
         TOP,
         BOTTOM
     }
-    private RectHV halveRect(RectHV rect, Point2D point, Side side) {
+    private RectHV splitRect(RectHV rect, Point2D point, Side side) {
         RectHV newRect;
         switch (side) {
             case LEFT:
@@ -120,7 +120,7 @@ public class KdTree {
                     continue;
                 } else {
                    // no child, insert new child node here; exit method
-                    RectHV newRect = halveRect(node.rect, node.point, Side.LEFT);
+                    RectHV newRect = splitRect(node.rect, node.point, Side.LEFT);
                     node.leftBottom = new Node(p, newRect);
                     size += 1;
                     return;
@@ -135,7 +135,7 @@ public class KdTree {
                     continue;
                 } else {
                     // no child, insert new child node here; exit method
-                    RectHV newRect = halveRect(node.rect, node.point, Side.RIGHT);
+                    RectHV newRect = splitRect(node.rect, node.point, Side.RIGHT);
                     node.rightTop = new Node(p, newRect);
                     size += 1;
                     return;
@@ -150,7 +150,7 @@ public class KdTree {
                     continue;
                 } else {
                     // no child, insert new child node here; exit method
-                    RectHV newRect = halveRect(node.rect, node.point, Side.BOTTOM);
+                    RectHV newRect = splitRect(node.rect, node.point, Side.BOTTOM);
                     node.leftBottom = new Node(p, newRect);
                     size += 1;
                     return;
@@ -164,7 +164,7 @@ public class KdTree {
                     continue;
                 } else {
                     // no child, insert new child node here; exit method
-                    RectHV newRect = halveRect(node.rect, node.point, Side.TOP);
+                    RectHV newRect = splitRect(node.rect, node.point, Side.TOP);
                     node.rightTop = new Node(p, newRect);
                     size += 1;
                     return;
@@ -218,16 +218,42 @@ public class KdTree {
             draw(node.rightTop, !compareX);
         }
     }
-    // all points in the set that are inside the rectangle
+
     public Iterable<Point2D> range(RectHV rect) {
         Stack<Point2D> stack = new Stack<Point2D>();
-
+        if (root != null) {
+            range(rect, root, stack);
+        }
+        return stack;
+    }
+    private Stack range(RectHV rect, Node node, Stack stack) {
+        // add node point if in rect
+        if (rect.contains(node.point)) {
+            stack.push(node.point);
+        }
+        // if query rect intersects node rect, explore children
+        if (rect.intersects(node.rect)) {
+            range(rect, node.leftBottom, stack);
+            range(rect, node.rightTop, stack);
+        }
         return stack;
     }
     // a nearest neighbor in the set to p; null if set is empty
     public Point2D nearest(Point2D p) {
-
-        return p;
+        if (root == null) return null;
+        return nearest(p, root, root.point);
+    }
+    private Point2D nearest(Point2D point, Node node, Point2D champion) {
+        // if node point is closer than champion, it becomes the new champion
+        if (point.distanceTo(node.point) < point.distanceTo(champion)) {
+            champion = node.point;
+        }
+        // only explore node if it can contain a point closer than the champion
+        if (point.distanceTo(champion) > node.rect.distanceTo(point)) {
+            nearest(point, node.rightTop, champion);
+            nearest(point, node.leftBottom, champion);
+        }
+        return champion;
     }
     public static void main(String[] args) {
         KdTree kdTree = new KdTree();
@@ -243,6 +269,6 @@ public class KdTree {
             StdOut.println("contains after: " + kdTree.contains(point));
             StdOut.println("size: " + kdTree.size());
         }
-        kdTree.draw();
+        //kdTree.draw();
     }
 }
