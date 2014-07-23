@@ -39,8 +39,8 @@
       <file leaf-file-name="KdTree.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/KdTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6507353" vertical-offset="4491" max-vertical-offset="5339">
-              <caret line="255" column="23" selection-start-line="255" selection-start-column="23" selection-end-line="255" selection-end-column="23" />
+            <state vertical-scroll-proportion="9.185661" vertical-offset="0" max-vertical-offset="5377">
+              <caret line="263" column="18" selection-start-line="263" selection-start-column="18" selection-end-line="263" selection-end-column="18" />
               <folding>
                 <element signature="e#1215#1216#0" expanded="true" />
                 <element signature="e#1247#1248#0" expanded="true" />
@@ -205,7 +205,7 @@
     <property name="dynamic.classpath" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
   </component>
-  <component name="RunManager" selected="Application.NearestNeighborVisualizer">
+  <component name="RunManager" selected="Application.KdTree">
     <configuration default="false" name="PointSET" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="PointSET" />
       <option name="VM_PARAMETERS" value="" />
@@ -430,10 +430,10 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.NearestNeighborVisualizer" />
-        <item index="1" class="java.lang.String" itemvalue="Application.RangeSearchVisualizer" />
-        <item index="2" class="java.lang.String" itemvalue="Application.KdTreeVisualizer" />
-        <item index="3" class="java.lang.String" itemvalue="Application.KdTree" />
+        <item index="0" class="java.lang.String" itemvalue="Application.KdTree" />
+        <item index="1" class="java.lang.String" itemvalue="Application.NearestNeighborVisualizer" />
+        <item index="2" class="java.lang.String" itemvalue="Application.RangeSearchVisualizer" />
+        <item index="3" class="java.lang.String" itemvalue="Application.KdTreeVisualizer" />
         <item index="4" class="java.lang.String" itemvalue="Application.PointSET" />
       </list>
     </recent_temporary>
@@ -555,17 +555,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PointSET.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1406">
-          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
-          <folding>
-            <element signature="e#161#162#0" expanded="true" />
-            <element signature="e#201#202#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/RectHV.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="722" max-vertical-offset="1691">
@@ -598,10 +587,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/PointSET.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1406">
+          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+          <folding>
+            <element signature="e#161#162#0" expanded="true" />
+            <element signature="e#201#202#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/KdTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6507353" vertical-offset="4491" max-vertical-offset="5339">
-          <caret line="255" column="23" selection-start-line="255" selection-start-column="23" selection-end-line="255" selection-end-column="23" />
+        <state vertical-scroll-proportion="9.185661" vertical-offset="0" max-vertical-offset="5377">
+          <caret line="263" column="18" selection-start-line="263" selection-start-column="18" selection-end-line="263" selection-end-column="18" />
           <folding>
             <element signature="e#1215#1216#0" expanded="true" />
             <element signature="e#1247#1248#0" expanded="true" />

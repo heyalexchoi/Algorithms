@@ -257,6 +257,7 @@ public class KdTree {
         }
         return champion;
     }
+    /*
     public static void main(String[] args) {
         KdTree kdTree = new KdTree();
         String fileName = args[0];
@@ -271,6 +272,7 @@ public class KdTree {
             StdOut.println("contains after: " + kdTree.contains(point));
             StdOut.println("size: " + kdTree.size());
         }
-        //kdTree.draw();
+        kdTree.draw();
     }
+    */
 }
