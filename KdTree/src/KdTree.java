@@ -23,7 +23,7 @@ public class KdTree {
         // the right/top subtree
         private Node rightTop;
 
-        public Node (Point2D p, RectHV r) {
+        private Node (Point2D p, RectHV r) {
             point = p;
             rect = r;
             leftBottom = null;
@@ -52,7 +52,7 @@ public class KdTree {
     // and coordinate and side
     // type def left right top bottom
     // takes in side and coordinate and rect
-    public enum Side {
+    private enum Side {
         LEFT,
         RIGHT,
         TOP,
@@ -226,7 +226,7 @@ public class KdTree {
         }
         return stack;
     }
-    private Stack range(RectHV rect, Node node, Stack stack) {
+    private Stack range(RectHV rect, Node node, Stack<Point2D> stack) {
         if (node == null) return stack;
         // add node point if in rect
         if (rect.contains(node.point)) {
