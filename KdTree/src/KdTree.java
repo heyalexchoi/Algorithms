@@ -97,106 +97,92 @@ public class KdTree {
     // add the point p to the set (if it is not already in the set)
     public void insert(Point2D p) {
         if (root == null) {
-            // make root node with point
-            // root rect is whole box
-            // we are told to assume all x and y will be between 0 and 1
             root = new Node(p, new RectHV(0,0,1,1));
-        } else {
-            // start with root node
-            // compare p.x with root.point.x
-            Node node = root;
-            // either comparing X or comparing Y
-            // (left/right partition or top/bottom partition)
-            boolean compareX = true;
+        }
+        // node we compare with point p
+        Node node = root;
+        // value we compare with, alternates between x an y
+        boolean compareX = true;
 
-            // while loop
-            // loop stops when new node inserted or existing is found
-            boolean searching = true;
-            while (searching) {
-                // exit if we find p
-                if (node.point.equals(p)) return;
-                if (compareX) {
-                    if (p.x() < node.point.x()) {
-                        // p is left of node point
-                        if (node.leftBottom != null) {
-                            // has left child, keep searching
-                            node = node.leftBottom;
-                            compareX = !compareX;
-                            continue;
-                        } else {
-                            // no left child, insert new node on left
-                            RectHV newRect = halveRect(node.rect, node.point, Side.LEFT);
-                            Node newNode = new Node(p, newRect);
-                            node.leftBottom = newNode;
-                            return;
-                        }
-                    } else {
-                        // p is right or equal x of node point
-                        if (node.rightTop != null ) {
-                            // has right child, keep searching
-                            node = node.rightTop;
-                            compareX = !compareX;
-                            continue;
-                        } else {
-                            // no right child, insert new node on right
-                            RectHV newRect = halveRect(node.rect, node.point, Side.RIGHT);
-                            Node newNode = new Node(p, newRect);
-                            node.rightTop = newNode;
-                            return;
-                        }
-                    }
+        while (true) {
+            if (node.point.equals(p)) return;
+
+            if (compareX && (p.x() < node.point.x())) {
+                // comparing X and point p is left of node point
+                if (node.leftBottom != null) {
+                    // has child: alternate compare, update node, continue loop
+                    node = node.leftBottom;
+                    compareX = !compareX;
+                    continue;
                 } else {
-                    // !compareX means we are comparing y
-                    if (p.y() < node.point.y()) {
-                        // p is below node point
-                        if (node.leftBottom != null) {
-                            // has bottom child, keep searching
-                            node = node.leftBottom;
-                            compareX = !compareX;
-                            continue;
-                        } else {
-                            // no bottom child, insert new node on bottom
-                            RectHV newRect = halveRect(node.rect, node.point, Side.BOTTOM);
-                            Node newNode = new Node(p, newRect);
-                            node.leftBottom = newNode;
-                            return;
-                        }
-                    } else {
-                        // p is above or equal y of node point
-                        if (node.rightTop != null ) {
-                            // has top child, keep searching
-                            node = node.rightTop;
-                            compareX = !compareX;
-                            continue;
-                        } else {
-                            // no top child, insert new node on top
-                            RectHV newRect = halveRect(node.rect, node.point, Side.TOP);
-                            Node newNode = new Node(p, newRect);
-                            node.rightTop = newNode;
-                            return;
-                        }
-                    }
+                   // no child, insert new child node here; exit method
+                    RectHV newRect = halveRect(node.rect, node.point, Side.LEFT);
+                    node.leftBottom = new Node(p, newRect);
+                    return;
                 }
             }
-
-
-            // compare appropriate dimension of node.point with p
-            // check appropriate child of node
-            // if null add there, increase size
-            // if not null, switch bool, update node, continue comparison
-            if (compareX && node.point.x() < p.x()) {
-                //
-
-            } else {
-
+            else if (compareX && (p.x() >= node.point.x())) {
+                // comparing X and point p is right or equal x of node point
+                if (node.rightTop != null ) {
+                    // has child: alternate compare, update node, continue loop
+                    node = node.rightTop;
+                    compareX = !compareX;
+                    continue;
+                } else {
+                    // no child, insert new child node here; exit method
+                    RectHV newRect = halveRect(node.rect, node.point, Side.RIGHT);
+                    node.rightTop = new Node(p, newRect);
+                    return;
+                }
             }
-
-
-
-
-            size += 1;
+         else if (!compareX && (p.y() < node.point.y())) {
+                // comparing Y and point p is below node point
+                if (node.leftBottom != null) {
+                    // has child: alternate compare, update node, continue loop
+                    node = node.leftBottom;
+                    compareX = !compareX;
+                    continue;
+                } else {
+                    // no child, insert new child node here; exit method
+                    RectHV newRect = halveRect(node.rect, node.point, Side.BOTTOM);
+                    node.leftBottom = new Node(p, newRect);
+                    return;
+                }
+            } else {
+                // comparing Y and point p is above or equal to node point
+                if (node.rightTop != null ) {
+                    // has child: alternate compare, update node, continue loop
+                    node = node.rightTop;
+                    compareX = !compareX;
+                    continue;
+                } else {
+                    // no child, insert new child node here; exit method
+                    RectHV newRect = halveRect(node.rect, node.point, Side.TOP);
+                    node.rightTop = new Node(p, newRect);
+                    return;
+                }
+            }
         }
     }
+
+
+    // compare appropriate dimension of node.point with p
+    // check appropriate child of node
+    // if null add there, increase size
+    // if not null, switch bool, update node, continue comparison
+    if (compareX && node.point.x() < p.x()) {
+        //
+
+    } else {
+
+    }
+
+
+
+
+    size += 1;
+
+}
     // does the set contain the point p?
     public boolean contains(Point2D p) {
         return set.contains(p);
