@@ -76,16 +76,16 @@ public class KdTree {
             case TOP:
                 newRect = new RectHV(
                         rect.xmin(),
-                        rect.ymin(),
+                        rect.ymin() + rect.height()/2,
                         rect.xmax(),
-                        rect.ymin() + rect.height()/2);
+                        rect.ymax());
                 break;
             case BOTTOM:
                 newRect = new RectHV(
                         rect.xmin(),
-                        rect.ymin() + rect.height()/2,
+                        rect.ymin(),
                         rect.xmax(),
-                        rect.ymax());
+                        rect.ymin() + rect.height()/2);
                 break;
             default:
                 throw new IllegalArgumentException();
@@ -111,37 +111,71 @@ public class KdTree {
 
             // while loop
             // loop stops when new node inserted or existing is found
-            // make sure to check for point equality at some point
             boolean searching = true;
             while (searching) {
+                // exit if we find p
+                if (node.point.equals(p)) return;
                 if (compareX) {
-                    // compare x
                     if (p.x() < node.point.x()) {
                         // p is left of node point
                         if (node.leftBottom != null) {
-                            // another node, keep going
+                            // has left child, keep searching
                             node = node.leftBottom;
                             compareX = !compareX;
                             continue;
                         } else {
-                            // no node, insert here
-                            // new rect that is left half of node rect
-                            RectHV newRect = new RectHV(
-                                    node.rect.xmin(),
-                                    node.rect.ymin(),
-                                    node.rect.xmin() + node.rect.width()/2,
-                                    node.rect.ymin() + node.rect.height());
-                            Node newNode = new Node(p,newRect);
+                            // no left child, insert new node on left
+                            RectHV newRect = halveRect(node.rect, node.point, Side.LEFT);
+                            Node newNode = new Node(p, newRect);
                             node.leftBottom = newNode;
-                            searching = false;
+                            return;
                         }
                     } else {
                         // p is right or equal x of node point
+                        if (node.rightTop != null ) {
+                            // has right child, keep searching
+                            node = node.rightTop;
+                            compareX = !compareX;
+                            continue;
+                        } else {
+                            // no right child, insert new node on right
+                            RectHV newRect = halveRect(node.rect, node.point, Side.RIGHT);
+                            Node newNode = new Node(p, newRect);
+                            node.rightTop = newNode;
+                            return;
+                        }
                     }
-
                 } else {
-                    // compare y
-
+                    // !compareX means we are comparing y
+                    if (p.y() < node.point.y()) {
+                        // p is below node point
+                        if (node.leftBottom != null) {
+                            // has bottom child, keep searching
+                            node = node.leftBottom;
+                            compareX = !compareX;
+                            continue;
+                        } else {
+                            // no bottom child, insert new node on bottom
+                            RectHV newRect = halveRect(node.rect, node.point, Side.BOTTOM);
+                            Node newNode = new Node(p, newRect);
+                            node.leftBottom = newNode;
+                            return;
+                        }
+                    } else {
+                        // p is above or equal y of node point
+                        if (node.rightTop != null ) {
+                            // has top child, keep searching
+                            node = node.rightTop;
+                            compareX = !compareX;
+                            continue;
+                        } else {
+                            // no top child, insert new node on top
+                            RectHV newRect = halveRect(node.rect, node.point, Side.TOP);
+                            Node newNode = new Node(p, newRect);
+                            node.rightTop = newNode;
+                            return;
+                        }
+                    }
                 }
             }
 
