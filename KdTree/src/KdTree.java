@@ -242,18 +242,28 @@ public class KdTree {
     // a nearest neighbor in the set to p; null if set is empty
     public Point2D nearest(Point2D p) {
         if (root == null) return null;
-        return nearest(p, root, root.point);
+        return nearest(p, root, root.point, true);
     }
-    private Point2D nearest(Point2D point, Node node, Point2D champion) {
+    private Point2D nearest(Point2D queryPoint, Node node, Point2D champion, boolean compareX) {
         if (node == null) return champion;
         // if node point is closer than champion, it becomes the new champion
-        if (point.distanceSquaredTo(node.point) < point.distanceSquaredTo(champion)) {
+        if (queryPoint.distanceSquaredTo(node.point) < queryPoint.distanceSquaredTo(champion)) {
             champion = node.point;
         }
         // only explore node if it can contain a point closer than the champion
-        if (point.distanceSquaredTo(champion) > node.rect.distanceSquaredTo(point)) {
-            champion = nearest(point, node.rightTop, champion);
-            champion = nearest(point, node.leftBottom, champion);
+        if (node.rect.distanceSquaredTo(queryPoint) < queryPoint.distanceSquaredTo(champion)) {
+            // query point is left or below node point
+            if ((compareX && queryPoint.x() < node.point.x()) ||
+                    (!compareX && queryPoint.y() < node.point.y())) {
+                // explore left bottom first
+                champion = nearest(queryPoint, node.leftBottom, champion, !compareX);
+                champion = nearest(queryPoint, node.rightTop, champion, !compareX);
+            } else {
+                // query point is right, above, or equal to node point
+                // explore right top first
+                champion = nearest(queryPoint, node.rightTop, champion, !compareX);
+                champion = nearest(queryPoint, node.leftBottom, champion, !compareX);
+            }
         }
         return champion;
     }
