@@ -98,6 +98,7 @@ public class KdTree {
     public void insert(Point2D p) {
         if (root == null) {
             root = new Node(p, new RectHV(0,0,1,1));
+            size += 1;
         }
         // node we compare with point p. start at root
         Node node = root;
@@ -195,6 +196,7 @@ public class KdTree {
 
     // draw all of the points to standard draw
     public void draw() {
+        
 
     }
     // all points in the set that are inside the rectangle
@@ -220,7 +222,7 @@ public class KdTree {
             kdTree.insert(point);
             StdOut.println("point:" + point);
             StdOut.println("contains after: " + kdTree.contains(point));
-
+            StdOut.println("size: " + kdTree.size());
         }
         kdTree.draw();
     }
