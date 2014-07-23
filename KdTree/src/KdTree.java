@@ -105,6 +105,7 @@ public class KdTree {
         boolean compareX = true;
 
         while (true) {
+            // if we find point p, exit method
             if (node.point.equals(p)) return;
 
             if (compareX && (p.x() < node.point.x())) {
@@ -118,6 +119,7 @@ public class KdTree {
                    // no child, insert new child node here; exit method
                     RectHV newRect = halveRect(node.rect, node.point, Side.LEFT);
                     node.leftBottom = new Node(p, newRect);
+                    size += 1;
                     return;
                 }
             }
@@ -132,6 +134,7 @@ public class KdTree {
                     // no child, insert new child node here; exit method
                     RectHV newRect = halveRect(node.rect, node.point, Side.RIGHT);
                     node.rightTop = new Node(p, newRect);
+                    size += 1;
                     return;
                 }
             }
@@ -146,6 +149,7 @@ public class KdTree {
                     // no child, insert new child node here; exit method
                     RectHV newRect = halveRect(node.rect, node.point, Side.BOTTOM);
                     node.leftBottom = new Node(p, newRect);
+                    size += 1;
                     return;
                 }
             } else {
@@ -159,30 +163,13 @@ public class KdTree {
                     // no child, insert new child node here; exit method
                     RectHV newRect = halveRect(node.rect, node.point, Side.TOP);
                     node.rightTop = new Node(p, newRect);
+                    size += 1;
                     return;
                 }
             }
         }
     }
 
-
-    // compare appropriate dimension of node.point with p
-    // check appropriate child of node
-    // if null add there, increase size
-    // if not null, switch bool, update node, continue comparison
-    if (compareX && node.point.x() < p.x()) {
-        //
-
-    } else {
-
-    }
-
-
-
-
-    size += 1;
-
-}
     // does the set contain the point p?
     public boolean contains(Point2D p) {
         return set.contains(p);
