@@ -195,31 +195,33 @@ public class KdTree {
 
     // draw all of the points to standard draw
     public void draw() {
-        for (Point2D point : set) {
-            point.draw();
-        }
+
     }
     // all points in the set that are inside the rectangle
     public Iterable<Point2D> range(RectHV rect) {
         Stack<Point2D> stack = new Stack<Point2D>();
-        for (Point2D point : set) {
-            if (rect.contains(point)) {
-                stack.push(point);
-            }
-        }
+
         return stack;
     }
     // a nearest neighbor in the set to p; null if set is empty
     public Point2D nearest(Point2D p) {
-        if (set.isEmpty()) return null;
-        Point2D nearestPoint = set.min();
-        double nearestDistance = p.distanceTo(nearestPoint);
-        for (Point2D point : set) {
-            if (p.distanceTo(point) < nearestDistance) {
-                nearestDistance = p.distanceTo(point);
-                nearestPoint = point;
-            }
+
+        return p;
+    }
+    public static void main(String[] args) {
+        KdTree kdTree = new KdTree();
+        String fileName = args[0];
+        In in = new In(fileName);
+        while (!in.isEmpty()) {
+            double x = in.readDouble();
+            double y = in.readDouble();
+            Point2D point = new Point2D(x,y);
+            StdOut.println("contains before: " + kdTree.contains(point));
+            kdTree.insert(point);
+            StdOut.println("point:" + point);
+            StdOut.println("contains after: " + kdTree.contains(point));
+
         }
-        return nearestPoint;
-    }        // a nearest neighbor in the set to p; null if set is empty
+        kdTree.draw();
+    }
 }

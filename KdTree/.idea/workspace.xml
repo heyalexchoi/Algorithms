@@ -26,9 +26,12 @@
       <file leaf-file-name="PointSET.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PointSET.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="133" max-vertical-offset="1520">
-              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="581" max-vertical-offset="1406">
+              <caret line="70" column="24" selection-start-line="59" selection-start-column="8" selection-end-line="70" selection-end-column="24" />
+              <folding>
+                <element signature="e#161#162#0" expanded="true" />
+                <element signature="e#201#202#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -36,14 +39,14 @@
       <file leaf-file-name="KdTree.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/KdTree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6545454" vertical-offset="3146" max-vertical-offset="4370">
-              <caret line="194" column="0" selection-start-line="194" selection-start-column="0" selection-end-line="194" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.9309091" vertical-offset="3507" max-vertical-offset="4408">
+              <caret line="225" column="5" selection-start-line="225" selection-start-column="5" selection-end-line="225" selection-end-column="5" />
               <folding>
                 <element signature="e#1195#1196#0" expanded="true" />
                 <element signature="e#1227#1228#0" expanded="true" />
                 <element signature="e#1286#1287#0" expanded="true" />
                 <element signature="e#1313#1314#0" expanded="true" />
-                <element signature="e#7096#7105#0" expanded="true" />
+                <element signature="e#7025#7034#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -403,7 +406,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1520">
           <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-          <folding />
+          <folding>
+            <element signature="e#161#162#0" expanded="true" />
+            <element signature="e#201#202#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -416,7 +422,7 @@
             <element signature="e#1227#1228#0" expanded="true" />
             <element signature="e#1286#1287#0" expanded="true" />
             <element signature="e#1313#1314#0" expanded="true" />
-            <element signature="e#7096#7105#0" expanded="true" />
+            <element signature="e#7025#7034#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -433,15 +439,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="95" max-vertical-offset="209">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PointSET.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1520">
-          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-          <folding />
+          <folding>
+            <element signature="e#161#162#0" expanded="true" />
+            <element signature="e#201#202#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -453,16 +454,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/PointSET.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="581" max-vertical-offset="1406">
+          <caret line="70" column="24" selection-start-line="59" selection-start-column="8" selection-end-line="70" selection-end-column="24" />
+          <folding>
+            <element signature="e#161#162#0" expanded="true" />
+            <element signature="e#201#202#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/KdTree.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6545454" vertical-offset="3146" max-vertical-offset="4370">
-          <caret line="194" column="0" selection-start-line="194" selection-start-column="0" selection-end-line="194" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.9309091" vertical-offset="3507" max-vertical-offset="4408">
+          <caret line="225" column="5" selection-start-line="225" selection-start-column="5" selection-end-line="225" selection-end-column="5" />
           <folding>
             <element signature="e#1195#1196#0" expanded="true" />
             <element signature="e#1227#1228#0" expanded="true" />
             <element signature="e#1286#1287#0" expanded="true" />
             <element signature="e#1313#1314#0" expanded="true" />
-            <element signature="e#7096#7105#0" expanded="true" />
+            <element signature="e#7025#7034#0" expanded="true" />
           </folding>
         </state>
       </provider>
