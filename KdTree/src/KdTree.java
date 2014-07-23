@@ -1,3 +1,5 @@
+import java.awt.*;
+
 /**
  * Created by alexchoi1 on 7/22/14.
  * A 2d-tree is a generalization of a BST to two-dimensional keys.
@@ -63,12 +65,12 @@ public class KdTree {
                 newRect = new RectHV(
                         rect.xmin(),
                         rect.ymin(),
-                        rect.xmin() + rect.width()/2,
+                        point.x(),
                         rect.ymax());
                 break;
             case RIGHT:
                 newRect = new RectHV(
-                        rect.xmin() + rect.width()/2,
+                        point.x(),
                         rect.ymin(),
                         rect.xmax(),
                         rect.ymax());
@@ -76,7 +78,7 @@ public class KdTree {
             case TOP:
                 newRect = new RectHV(
                         rect.xmin(),
-                        rect.ymin() + rect.height()/2,
+                        point.y(),
                         rect.xmax(),
                         rect.ymax());
                 break;
@@ -85,7 +87,7 @@ public class KdTree {
                         rect.xmin(),
                         rect.ymin(),
                         rect.xmax(),
-                        rect.ymin() + rect.height()/2);
+                        point.y());
                 break;
             default:
                 throw new IllegalArgumentException();
@@ -196,8 +198,25 @@ public class KdTree {
 
     // draw all of the points to standard draw
     public void draw() {
-        
-
+        draw(root, true);
+    }
+    private void draw(Node node, boolean compareX) {
+        //  draw all of the points to standard draw in black
+        // and the subdivisions in red (for vertical splits)
+        // and blue (for horizontal splits)
+        if (node != null) {
+            StdDraw.setPenColor(Color.BLACK);
+            node.point.draw();
+            if (compareX) {
+                StdDraw.setPenColor(Color.RED);
+                StdDraw.line(node.point.x(),node.rect.ymin(),node.point.x(),node.rect.ymax());
+            } else {
+                StdDraw.setPenColor(Color.BLUE);
+                StdDraw.line(node.rect.xmin(),node.point.y(),node.rect.xmax(),node.point.y());
+            }
+            draw(node.leftBottom, !compareX);
+            draw(node.rightTop, !compareX);
+        }
     }
     // all points in the set that are inside the rectangle
     public Iterable<Point2D> range(RectHV rect) {
