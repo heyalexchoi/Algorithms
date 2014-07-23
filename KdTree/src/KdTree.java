@@ -247,11 +247,11 @@ public class KdTree {
     private Point2D nearest(Point2D point, Node node, Point2D champion) {
         if (node == null) return champion;
         // if node point is closer than champion, it becomes the new champion
-        if (point.distanceTo(node.point) < point.distanceTo(champion)) {
+        if (point.distanceSquaredTo(node.point) < point.distanceSquaredTo(champion)) {
             champion = node.point;
         }
         // only explore node if it can contain a point closer than the champion
-        if (point.distanceTo(champion) > node.rect.distanceTo(point)) {
+        if (point.distanceSquaredTo(champion) > node.rect.distanceSquaredTo(point)) {
             champion = nearest(point, node.rightTop, champion);
             champion = nearest(point, node.leftBottom, champion);
         }
