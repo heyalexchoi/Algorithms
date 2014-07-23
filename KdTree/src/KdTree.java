@@ -227,6 +227,7 @@ public class KdTree {
         return stack;
     }
     private Stack range(RectHV rect, Node node, Stack stack) {
+        if (node == null) return stack;
         // add node point if in rect
         if (rect.contains(node.point)) {
             stack.push(node.point);
