@@ -6,7 +6,7 @@ public class PointSET {
     private SET<Point2D> set;
     // construct an empty set of points
     public PointSET() {
-        set = new SET();
+        set = new SET<Point2D>();
     }
     // is the set empty?
     public boolean isEmpty() {
@@ -49,9 +49,26 @@ public class PointSET {
         double nearestDistance = p.distanceTo(nearestPoint);
         for (Point2D point : set) {
             if (p.distanceTo(point) < nearestDistance) {
+                nearestDistance = p.distanceTo(point);
                 nearestPoint = point;
             }
         }
         return nearestPoint;
     }
+/*
+    public static void main(String args[]) {
+        PointSET pointSet = new PointSET();
+        String fileName = args[0];
+        In in = new In(fileName);
+        while (!in.isEmpty()) {
+            double x = in.readDouble();
+            double y = in.readDouble();
+            Point2D point = new Point2D(x,y);
+            pointSet.insert(point);
+            StdOut.println("point:" + point);
+            StdOut.println("nearest: " + pointSet.nearest(point));
+        }
+        pointSet.draw();
+    }
+    */
 }
