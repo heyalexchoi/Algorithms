@@ -31,6 +31,9 @@ public class Percolation
     private boolean[] isOpen;
     ///  quickUnion represents connectivity between sites. connected, open sites percolate to one another.
     private WeightedQuickUnionUF quickUnion;
+    // quick union structure for tracking fullness without backwash.
+    // similar to quickUnion above, but without bottom virtual site
+    private WeightedQuickUnionUF fullness;
     /// index of virtual site that is connected to entire top row, initializes to 0.
     private int virtualTopIndex; 
     /// index of virtual site that is connected to entire bottom row, initializes to (N^2)+1
@@ -80,12 +83,14 @@ public class Percolation
         isOpen[virtualBottomIndex] = true; /// open virtual bottom site
         
         quickUnion = new WeightedQuickUnionUF(arraySize);
+        fullness = new WeightedQuickUnionUF(arraySize);
         for (int j = 1; j<=N; j++)
         {
             /// connect all top row sites to virtual top site
             int i = 1;
             int topSiteIndex = siteIndex(i,j);
             quickUnion.union(virtualTopIndex,topSiteIndex);
+            fullness.union(virtualTopIndex, topSiteIndex);
             
             /// connect all bottom row sites to virtual bottom site
             i = N;
@@ -109,24 +114,28 @@ public class Percolation
             {
                 int indexToLeft = siteIndex(i,j-1);
                 quickUnion.union(siteIndex,indexToLeft);
+                fullness.union(siteIndex, indexToLeft);
             }
             
             if (j<gridLength && isOpen(i,j+1)) 
             {
                 int indexToRight = siteIndex(i,j+1);
                 quickUnion.union(siteIndex,indexToRight);
+                fullness.union(siteIndex,indexToRight);
             }
             
             if (i>1 && isOpen(i-1,j)) // site is not top edge
             {
                 int indexToTop = siteIndex(i-1,j);
                 quickUnion.union(siteIndex,indexToTop);
+                fullness.union(siteIndex,indexToTop);
             }
             
             if (i<gridLength && isOpen(i+1,j)) /// site is not on bottom edge
             {
                 int indexToBottom = siteIndex(i+1,j);
                 quickUnion.union(siteIndex,indexToBottom);
+                fullness.union(siteIndex,indexToBottom);
             }
         }  
     };   
@@ -144,7 +153,8 @@ public class Percolation
     public boolean isFull(int i, int j)
     {
         int siteIndex = siteIndex(i,j);
-        return (quickUnion.connected(virtualTopIndex,siteIndex) && isOpen[siteIndex]);
+        //return (quickUnion.connected(virtualTopIndex,siteIndex) && isOpen[siteIndex]);
+        return (fullness.connected(virtualTopIndex,siteIndex) && isOpen[siteIndex]);
     }  
     
     // does the system percolate?
@@ -164,7 +174,6 @@ public class Percolation
         StdOut.println(percolation.percolates());
         percolation.open(1,1);
         StdOut.println(percolation.percolates());
-
         Percolation percolation2 = new Percolation(2);
         StdOut.println(percolation2.percolates());
         percolation2.open(1,1);
